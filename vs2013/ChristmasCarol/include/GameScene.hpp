@@ -19,6 +19,9 @@ public:
 private:
 	CommonInfo m_info;
 	GameLogic m_logic;
+
+	uth::GameObject* m_santa;
+	std::vector<pmath::Vec2> m_waypoints;
 };
 
 #endif

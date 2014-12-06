@@ -32,7 +32,7 @@ uth::Scene* NewSceneFunc(int SceneID)
 	switch (SceneID)
 	{
 	case SceneName::MENU:		return new MenuScene();
-	case SceneName::GAME:		//return new GameScene();
+	case SceneName::GAME:		return new GameScene();
 	case SceneName::GAMEOVER:	//return new GameOverScene();
 	case SceneName::CREDITS:	//return new CreditsScene();
 	default:		return nullptr;

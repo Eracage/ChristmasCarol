@@ -19,6 +19,13 @@ public:
 
 private:
 
+	void CalculateMoveDir();
+	void Eat();
+
+	CommonInfo& m_commonInfo;
+	int m_targetIndex;
+	int m_moveDir;
+	bool m_eat;
 };
 
 #endif

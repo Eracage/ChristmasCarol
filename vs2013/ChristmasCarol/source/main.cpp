@@ -8,6 +8,7 @@ int main()
 {
 	uthSceneM.registerNewSceneFunc(NewSceneFunc,SceneName::COUNT);
 
+	srand(time(NULL));
 	Highscore a;
 	uthEngine.Init();
 

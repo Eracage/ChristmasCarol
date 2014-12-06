@@ -26,7 +26,7 @@ bool MenuScene::Init()
 		{
 		case 0:
 			go->AddComponent(new Sprite("test.tga"));
-			go->AddComponent(new Button([](){uthSceneM.GoToScene(-1); }));
+			go->AddComponent(new Button([](){uthSceneM.GoToScene(SceneName::GAME); }));
 			break;
 		default:
 			go->AddComponent(new Button([](){uthSceneM.GoToScene(-1); }));

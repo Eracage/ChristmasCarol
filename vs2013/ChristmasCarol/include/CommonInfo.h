@@ -6,6 +6,8 @@ struct CommonInfo
 {
 	float time;
 	float position;
+	unsigned long long score;
+	int multiplier;
 };
 
 #endif

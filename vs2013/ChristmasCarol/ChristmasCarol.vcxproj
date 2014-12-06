@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Button.cpp" />
+    <ClCompile Include="source\FoodComponent.cpp" />
     <ClCompile Include="source\GameLogic.cpp" />
     <ClCompile Include="source\HighScore.cpp" />
     <ClCompile Include="source\main.cpp" />
@@ -109,12 +110,14 @@
     <ClInclude Include="include\Button.hpp" />
     <ClInclude Include="include\CommonInfo.h" />
     <ClInclude Include="include\CreditsScene.hpp" />
+    <ClInclude Include="include\FoodComponent.h" />
     <ClInclude Include="include\GameLogic.h" />
     <ClInclude Include="include\GameOverScene.hpp" />
     <ClInclude Include="include\GameScene.hpp" />
     <ClInclude Include="include\HighScore.hpp" />
     <ClInclude Include="include\Scenes.hpp" />
     <ClInclude Include="include\MenuScene.hpp" />
+    <ClInclude Include="include\UpdatingText.h" />
     <ClInclude Include="include\Util.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
