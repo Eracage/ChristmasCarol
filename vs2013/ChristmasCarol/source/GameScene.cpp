@@ -1,5 +1,6 @@
 #include <GameScene.hpp>
 #include <Scenes.hpp>
+#include <GameLogic.h>
 
 using namespace uth;
 
@@ -29,6 +30,7 @@ bool GameScene::DeInit()
 
 void GameScene::Update(float dt)
 {
+	int reduced = m_logic.Update(dt);
 	Scene::Update(dt);
 }
 
