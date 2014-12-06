@@ -8,7 +8,6 @@ Highscore::Highscore()
 	if (file.OpenFile("testfile.lol", uth::FileManager::Location::INTERNAL))
 	{
 		auto data = file.ReadBinary();
-		WriteLog("%d\n", sizeof(m_scores));
 		memcpy((void*)m_scores, data.ptr(), sizeof(m_scores));
 		file.CloseFile();
 	}
@@ -16,9 +15,9 @@ Highscore::Highscore()
 	{
 		for (int i = 0; i < 10; i++)
 		{
-			m_scores[i].score = i * pow(10, i);
+			m_scores[9-i].score = i * pow(10, i);
 			for (int j = 0; j < 3; j++)
-				m_scores[i].name[i] = 'A';
+				m_scores[9-i].name[j] = 'A';
 		}
 	}
 }
