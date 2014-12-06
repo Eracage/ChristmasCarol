@@ -2,11 +2,13 @@
 
 #define NEWSCENEFUNC
 #include <Scenes.hpp>
+#include <HighScore.hpp>
 
 int main()
 {
-	uthSceneM.registerNewSceneFunc(NewSceneFunc,COUNT);
+	uthSceneM.registerNewSceneFunc(NewSceneFunc,SceneName::COUNT);
 
+	Highscore a;
 	uthEngine.Init();
 
 	while(uthEngine.Running())

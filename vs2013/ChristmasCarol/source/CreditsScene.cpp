@@ -3,16 +3,6 @@
 
 using namespace uth;
 
-
-namespace
-{
-    enum Layers
-    {
-        Default,
-        Other
-    };
-}
-
 CreditsScene::CreditsScene()
 {}
 CreditsScene::~CreditsScene()

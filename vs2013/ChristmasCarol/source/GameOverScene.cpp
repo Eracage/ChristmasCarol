@@ -3,16 +3,6 @@
 
 using namespace uth;
 
-
-namespace
-{
-    enum Layers
-    {
-        Default,
-        Other
-    };
-}
-
 GameOverScene::GameOverScene()
 {}
 GameOverScene::~GameOverScene()

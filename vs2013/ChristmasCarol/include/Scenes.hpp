@@ -3,15 +3,18 @@
 #define UTHDefaultScene -1
 
 // Enumeration of scenes, giving name for each scene number
-enum SceneName
+namespace SceneName
 {
-	DEFAULT = UTHDefaultScene,
-	MENU,
-	GAME,
-	GAMEOVER,
-	CREDITS,
-	COUNT // Keep this last, it tells how many scenes there are
-};
+	enum
+	{
+		DEFAULT = UTHDefaultScene,
+		MENU,
+		GAME,
+		GAMEOVER,
+		CREDITS,
+		COUNT // Keep this last, it tells how many scenes there are
+	};
+}
 
 #endif //SCENES_H
 
@@ -28,10 +31,10 @@ uth::Scene* NewSceneFunc(int SceneID)
 {
 	switch (SceneID)
 	{
-	case MENU:		//return new MenuScene();
-	case GAME:		//return new GameScene();
-	case GAMEOVER:	//return new GameOverScene();
-	case CREDITS:	//return new CreditsScene();
+	case SceneName::MENU:		return new MenuScene();
+	case SceneName::GAME:		//return new GameScene();
+	case SceneName::GAMEOVER:	//return new GameOverScene();
+	case SceneName::CREDITS:	//return new CreditsScene();
 	default:		return nullptr;
 	}
 }
