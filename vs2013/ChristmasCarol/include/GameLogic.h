@@ -7,8 +7,10 @@
 class GameLogic
 {
 public:
-	GameLogic(CommonInfo& commonInfo, int types[10]);
+	GameLogic(CommonInfo& commonInfo);
 	~GameLogic();
+
+	void SetTypes(int types[8]);
 
 	void MoveToIndex(const int index);
 	void EatInIndex(const int index);

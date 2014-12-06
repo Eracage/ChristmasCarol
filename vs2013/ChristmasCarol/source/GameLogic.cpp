@@ -1,11 +1,16 @@
 #include "GameLogic.h"
 
-GameLogic::GameLogic(CommonInfo& commonInfo, int types[10])
+GameLogic::GameLogic(CommonInfo& commonInfo)
 {
 
 }
 
 GameLogic::~GameLogic()
+{
+
+}
+
+void GameLogic::SetTypes(int types[8])
 {
 
 }
@@ -22,5 +27,5 @@ void GameLogic::EatInIndex(const int index)
 
 int GameLogic::Update(float dt)
 {
-
+	return -1;
 }

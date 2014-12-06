@@ -15,12 +15,15 @@ namespace
 }
 
 GameScene::GameScene()
+	: m_logic(m_info)
 {}
 GameScene::~GameScene()
 {}
 
 bool GameScene::Init()
 {
+	int array[8];
+	m_logic.SetTypes(array);
 	return true;
 }
 bool GameScene::DeInit()

@@ -17,6 +17,7 @@ public:
 	void Update(float dt) override;
 	//void Draw(RenderTarget& target, RenderAttributes attributes = RenderAttributes()) override;
 private:
+	CommonInfo m_info;
 	GameLogic m_logic;
 };
 
