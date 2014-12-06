@@ -102,6 +102,7 @@
     <ClCompile Include="source\GameOverScene.cpp" />
     <ClCompile Include="source\GameScene.cpp" />
     <ClCompile Include="source\MenuScene.cpp" />
+    <ClCompile Include="source\Util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Button.hpp" />
@@ -111,6 +112,7 @@
     <ClInclude Include="include\HighScore.hpp" />
     <ClInclude Include="include\Scenes.hpp" />
     <ClInclude Include="include\MenuScene.hpp" />
+    <ClInclude Include="include\Util.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
