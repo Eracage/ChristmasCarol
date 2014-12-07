@@ -4,7 +4,8 @@
 
 struct CommonInfo
 {
-	float time;
+	int time;
+	int boostTime;
 	float position;
 	unsigned long long score;
 	int multiplier;

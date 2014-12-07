@@ -10,11 +10,13 @@ public:
 	FoodComponent(int type);
 	~FoodComponent();
 
+	void Init() override;
+
 	void DropState();
 
 private:
-	int type;
-	int state;
+	int m_type;
+	int m_state;
 	std::vector<uth::GameObject*> m_linkedObjects;
 
 };

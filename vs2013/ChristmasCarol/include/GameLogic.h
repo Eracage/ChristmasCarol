@@ -18,14 +18,30 @@ public:
 	int Update(float dt);
 
 private:
+	struct Food
+	{
+		int type;
+		int amount;
+		int max;
+	};
 
 	void CalculateMoveDir();
-	void Eat();
+
+	void Score(int amount);
+
+	int Eat();
 
 	CommonInfo& m_commonInfo;
 	int m_targetIndex;
+	int m_lastIndex;
+	int m_lastCount;
+
 	int m_moveDir;
 	bool m_eat;
+	Food m_foods[8];
+
+	float m_timer;
+	float m_boostTimer;
 };
 
 #endif

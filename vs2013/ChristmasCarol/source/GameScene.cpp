@@ -2,6 +2,9 @@
 #include <Scenes.hpp>
 #include <GameLogic.h>
 #include <Util.hpp>
+#include <Button.hpp>
+#include <UpdatingText.h>
+#include <FoodComponent.h>
 
 using namespace uth;
 
@@ -53,16 +56,27 @@ bool GameScene::Init()
 	{
 		GameObject* go;
 		AddChild(go = new GameObject());
+		go->transform.SetPosition(-920, -540);
+		go->AddComponent(new UpdatingText<unsigned long long>("Score: ", m_info.score));
+	}
+	{
+		GameObject* go;
+		AddChild(go = new GameObject());
+		go->transform.SetPosition(-920, -500);
+		go->AddComponent(new UpdatingText<int>("Time: ", m_info.time));
+	}
+	{
+		GameObject* go;
+		AddChild(go = new GameObject());
 		go->AddComponent(new Sprite(pmath::Vec4(0,1,0,1),pmath::Vec2(1100,500)/*"test.tga"*/));
+	}
+	{
+		AddChild(m_batch = new SpriteBatch());
 	}
 	{
 		AddChild(m_santa = new GameObject());
 		m_santa->AddComponent(new Sprite("test.tga"));
 	}
-
-	int array[8];
-	randomTypes(array);
-	m_logic.SetTypes(array);
 
 	const float width = 1400;
 	const float height = 800;
@@ -74,6 +88,20 @@ bool GameScene::Init()
 		m_waypoints.push_back({ -width / 2 + width / 6 * i, height / 2 });
 	for (int i = 1; i >= 0; i--)
 		m_waypoints.push_back({ -width / 2, -height / 2 + height / 2 * i });
+
+	int array[8];
+	randomTypes(array);
+	m_logic.SetTypes(array);
+	for (int i = 0; i < 8; i++)
+	{
+		static GameLogic& logic = m_logic;
+		GameObject* go;
+		m_batch->AddChild(go = new GameObject("Food"));
+		go->AddComponent(new FoodComponent(array[i]));
+		go->AddComponent(new Button([i](){logic.EatInIndex(i); }));
+
+		go->transform.SetPosition(m_waypoints[i * 2].x * 0.8, m_waypoints[i * 2].y * 0.6);
+	}
 
 	return true;
 }
@@ -115,6 +143,8 @@ void GameScene::Update(float dt)
 		));
 
 	int reduced = m_logic.Update(dt);
+	if (reduced != -1)
+		((GameObject*)m_batch->Children("Food")[reduced].get())->GetComponent<FoodComponent>()->DropState();
 	Scene::Update(dt);
 }
 

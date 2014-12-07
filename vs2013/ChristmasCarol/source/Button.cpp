@@ -19,7 +19,7 @@ void Button::Init()
 	{
 		parent->AddComponent(new Sprite(
 			pmath::Vec4(Randomizer::GetFloat(), Randomizer::GetFloat(), Randomizer::GetFloat(), 1),
-			pmath::Vec2(256,128)
+			pmath::Vec2(64,64)
 			));
 	}
 }
@@ -39,6 +39,11 @@ void Button::Update(float dt)
 	{
 		m_notContained();
 	}
+}
+
+void Button::SetSize(pmath::Vec2)
+{
+
 }
 
 
