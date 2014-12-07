@@ -33,7 +33,7 @@ namespace uth
 	{
 		if ((!m_atlas && !m_texture) || !object)
 		{
-            if (m_adoptedPointers)
+            if (!m_adoptedPointers)
             {
                 // There's no penalty for deleting a null pointer.
                 delete object;
@@ -88,14 +88,22 @@ namespace uth
 
     bool SpriteBatch::RemoveSprite(Transform* object)
     {
-        for (auto& i : m_objects)
-        {
-            if (i.get() == object)
-            {
-                if (!m_adoptedPointers)
-                    i.release();
-            }
-        }
+		int i;
+		for (i = 0; i < m_objects.size(); i++)
+		{
+			if (m_objects[i].get() == object)
+			{
+				if (!m_adoptedPointers)
+				{
+					m_objects[i].release();
+				}
+
+				m_objects.erase(m_objects.begin() + i);
+				for (int j = 3; j >= 0; --j)
+					m_vertexData.erase(m_vertexData.begin() + i * 4 + j);
+				return false;
+			}
+		}
 
         return false;
     }
