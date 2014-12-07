@@ -17,7 +17,7 @@ public:
 private:
 	int m_type;
 	int m_state;
-	std::vector<uth::GameObject*> m_linkedObjects;
+	std::vector<uth::Object*> m_objects;
 
 };
 

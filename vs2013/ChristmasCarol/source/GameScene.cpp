@@ -40,6 +40,9 @@ GameScene::~GameScene()
 
 bool GameScene::Init()
 {
+	const float tableScale = 0.6f;
+
+#pragma region Texts
 	{
 		GameObject* go;
 		AddChild(go = new GameObject());
@@ -64,21 +67,26 @@ bool GameScene::Init()
 		go->transform.SetPosition(-920, -420);
 		go->AddComponent(new UpdatingText<float, int>("Boost: ", m_info.boostTime, "s"));
 	}
+#pragma endregion
+
 	{
 		GameObject* go;
 		AddChild(go = new GameObject());
-		go->AddComponent(new Sprite(pmath::Vec4(0,1,0,1),pmath::Vec2(1100,500)/*"test.tga"*/));
+		go->AddComponent(new Sprite("table.png"/*pmath::Vec4(0,1,0,1),pmath::Vec2(1100,500)*/));
+		go->transform.SetScale(tableScale);
 	}
 	{
-		AddChild(m_batch = new SpriteBatch());
+		m_atlas.LoadFromFile("sprites.xml");
+		AddChild(m_batch = new SpriteBatch(false));
+		m_batch->SetTextureAtlas(&m_atlas);
 	}
 	{
 		AddChild(m_santa = new GameObject());
 		m_santa->AddComponent(new Sprite("test.tga"));
 	}
 
-	const float width = 1400;
-	const float height = 800;
+	const float width = 1660 * tableScale;
+	const float height = 1240 * tableScale;
 	for (int i = 1; i <= 6; i++)
 		m_waypoints.push_back({ -width / 2 + width / 6 * i, -height / 2 });
 	for (int i = 1; i <= 2; i++)
@@ -95,11 +103,20 @@ bool GameScene::Init()
 	{
 		static GameLogic& logic = m_logic;
 		GameObject* go;
+		Button* btn;
 		m_batch->AddChild(go = new GameObject("Food"));
 		go->AddComponent(new FoodComponent(array[i]));
-		go->AddComponent(new Button([i](){logic.EatInIndex(i); }));
+		go->AddComponent(btn = new Button([i](){logic.EatInIndex(i); }));
+		btn->SetSize({ 128, 128 });
 
-		go->transform.SetPosition(m_waypoints[i * 2].x * 0.8, m_waypoints[i * 2].y * 0.6);
+		if ((i+1)%4 == 0)
+			go->transform.SetPosition(
+			m_waypoints[i * 2].x - (m_waypoints[i * 2].x > 0 ? 1 : -1) * 150,
+			m_waypoints[i * 2].y);
+		else
+			go->transform.SetPosition(
+			m_waypoints[i * 2].x * 0.9, 
+			m_waypoints[i * 2].y - (m_waypoints[i * 2].y > 0 ? 1 : -1) * 160);
 	}
 
 	return true;

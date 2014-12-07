@@ -1,0 +1,33 @@
+<TextureAtlas imagePath="sprites.png">
+	<SubTexture name="cake1.png" x="258" y="1354" width="221" height="186"/>
+	<SubTexture name="cake2.png" x="260" y="1106" width="193" height="185"/>
+	<SubTexture name="cake3.png" x="287" y="795" width="173" height="140"/>
+	<SubTexture name="candle1.png" x="462" y="731" width="51" height="187"/>
+	<SubTexture name="candle2.png" x="463" y="920" width="51" height="151"/>
+	<SubTexture name="candle3.png" x="481" y="1348" width="51" height="186"/>
+	<SubTexture name="candle4.png" x="455" y="1226" width="51" height="120"/>
+	<SubTexture name="candle5.png" x="0" y="1964" width="51" height="41"/>
+	<SubTexture name="candleFlame.png" x="410" y="1944" width="87" height="85"/>
+	<SubTexture name="candleholder.png" x="256" y="1784" width="240" height="158"/>
+	<SubTexture name="candy.png" x="256" y="1944" width="152" height="83"/>
+	<SubTexture name="chair.png" x="0" y="0" width="320" height="375"/>
+	<SubTexture name="cookies.png" x="322" y="0" width="127" height="92"/>
+	<SubTexture name="gingerbread.png" x="274" y="969" width="187" height="129"/>
+	<SubTexture name="ham1.png" x="0" y="795" width="285" height="172"/>
+	<SubTexture name="ham2.png" x="0" y="1618" width="254" height="171"/>
+	<SubTexture name="ham3.png" x="0" y="1791" width="254" height="171"/>
+	<SubTexture name="isammaa.png" x="460" y="332" width="87" height="238"/>
+	<SubTexture name="milkEmpty.png" x="322" y="205" width="95" height="125"/>
+	<SubTexture name="milkFull.png" x="419" y="205" width="95" height="125"/>
+	<SubTexture name="plate1.png" x="0" y="377" width="318" height="204"/>
+	<SubTexture name="plate2.png" x="0" y="1106" width="258" height="246"/>
+	<SubTexture name="plate4.png" x="0" y="1354" width="256" height="262"/>
+	<SubTexture name="porridge.png" x="320" y="377" width="138" height="134"/>
+	<SubTexture name="rosolli.png" x="322" y="94" width="125" height="109"/>
+	<SubTexture name="salad.png" x="313" y="583" width="169" height="146"/>
+	<SubTexture name="turkey1.png" x="0" y="583" width="311" height="210"/>
+	<SubTexture name="turkey2.png" x="0" y="969" width="272" height="135"/>
+	<SubTexture name="turkey3.png" x="256" y="1618" width="245" height="164"/>
+	<SubTexture name="wineEmpty.png" x="451" y="0" width="93" height="124"/>
+	<SubTexture name="wineFull.png" x="455" y="1100" width="92" height="124"/>
+</TextureAtlas>

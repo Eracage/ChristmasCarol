@@ -10,7 +10,7 @@ public:
 
 	Button(voidFunc onPressFunc, voidFunc onHoverFunc = [](){}, voidFunc notContainedFunc = [](){});
 	~Button();
-	void SetSize(pmath::Vec2);
+	void SetSize(pmath::Vec2 size);
 	void Init() override;
 	void Update(float dt) override;
 private:
