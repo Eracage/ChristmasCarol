@@ -9,6 +9,8 @@ struct CommonInfo
 	static float position;
 	static unsigned long long score;
 	static int multiplier;
+	static float dangerTime;
+	static float dangerPos;
 };
 
 #endif

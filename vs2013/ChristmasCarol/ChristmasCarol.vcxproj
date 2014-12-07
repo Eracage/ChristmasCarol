@@ -97,6 +97,7 @@
   <ItemGroup>
     <ClCompile Include="source\Button.cpp" />
     <ClCompile Include="source\CommonInfo.cpp" />
+    <ClCompile Include="source\Danger.cpp" />
     <ClCompile Include="source\FoodComponent.cpp" />
     <ClCompile Include="source\GameLogic.cpp" />
     <ClCompile Include="source\HighScore.cpp" />
@@ -111,6 +112,7 @@
     <ClInclude Include="include\Button.hpp" />
     <ClInclude Include="include\CommonInfo.h" />
     <ClInclude Include="include\CreditsScene.hpp" />
+    <ClInclude Include="include\Danger.h" />
     <ClInclude Include="include\FoodComponent.h" />
     <ClInclude Include="include\GameLogic.h" />
     <ClInclude Include="include\GameOverScene.hpp" />

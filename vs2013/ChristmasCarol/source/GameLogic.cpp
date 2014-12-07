@@ -1,4 +1,6 @@
 #include <GameLogic.h>
+#include <UtH/UtHEngine.hpp>
+#include <Scenes.hpp>
 
 GameLogic::GameLogic(CommonInfo& commonInfo)
 	: m_commonInfo(commonInfo),
@@ -13,6 +15,8 @@ GameLogic::GameLogic(CommonInfo& commonInfo)
 	m_commonInfo.position = 1;
 	m_commonInfo.score = 0;
 	m_commonInfo.multiplier = 1;
+	m_commonInfo.dangerTime = -5;
+	m_commonInfo.dangerPos = 5;
 }
 
 GameLogic::~GameLogic()
@@ -40,7 +44,7 @@ void GameLogic::SetTypes(int types[8])
 			m_foods[i].amount = 30;
 			break;
 		case 4:
-			m_foods[i].amount = 1;
+			m_foods[i].amount = 35;
 			break;
 		}
 		m_foods[i].max = m_foods[i].amount;
@@ -65,7 +69,7 @@ int GameLogic::Update(float dt)
 {
 	m_commonInfo.time -= dt;
 	if (m_commonInfo.time < 0)
-		m_commonInfo.time = 0;
+		uthSceneM.GoToScene(SceneName::GAMEOVER);
 	m_commonInfo.boostTime -= dt;
 	if (m_commonInfo.boostTime < 0)
 		m_commonInfo.boostTime = 0;
@@ -102,6 +106,13 @@ int GameLogic::Update(float dt)
 		m_eat = false;
 
 		return Eat();
+	}
+
+	if (CommonInfo::dangerTime > 2.5f)
+	{
+		if (m_commonInfo.dangerPos - 1.5 < CommonInfo::position &&
+			CommonInfo::position < m_commonInfo.dangerPos + 1.5)
+			uthSceneM.GoToScene(SceneName::GAMEOVER);
 	}
 
 	return -1;
@@ -234,9 +245,12 @@ int GameLogic::Eat()
 			}
 			break;
 		case 4:
+			if (m_foods[i].amount == 0)
+			{
 				Score(500);
 				m_commonInfo.boostTime = 15.0f;
 				retVal = i;
+			}
 			break;
 		}
 
