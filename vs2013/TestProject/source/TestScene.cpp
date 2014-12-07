@@ -1,6 +1,6 @@
 #include <TestScene.hpp>
 #include <Scenes.hpp>
-#include <uth/Platform/JavaFunctions.hpp>
+#include <UtH/Platform/JavaFunctions.hpp>
 #include <UtH/Platform/GooglePlayGameServices.hpp>
 
 using namespace uth;

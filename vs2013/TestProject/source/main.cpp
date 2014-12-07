@@ -1,4 +1,4 @@
-#include <UtH/uthEngine.hpp>
+#include <UtH/UtHEngine.hpp>
 
 #define NEWSCENEFUNC
 #include <Scenes.hpp>

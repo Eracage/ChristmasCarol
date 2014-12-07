@@ -248,7 +248,7 @@ void Sound::Initialize(std::string fileName)
 	virtualIO.tell = &FileManager::tellAsset;
 
 	SNDFILE* file = sf_open_virtual(&virtualIO, SFM_READ, &soundInfo, asset);
-#elif defined(UTH_SYSTEM_WINDOWS)
+#elif defined(UTH_SYSTEM_WINDOWS) || defined(UTH_SYSTEM_LINUX)
 	SNDFILE* file = sf_open(("assets/" + fileName).c_str(), SFM_READ, &soundInfo);
 #endif
 

@@ -78,11 +78,6 @@ bool Engine::initialize()
 	return true;
 }
 
-const Timer& Engine::Timer() const
-{
-	return m_timer;
-}
-
 const pmath::Vec2 Engine::GetWindowResolution() const
 {
 	return m_wsettings.size;
