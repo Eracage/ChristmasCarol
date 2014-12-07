@@ -21,28 +21,15 @@ namespace
 void randomTypes(int array[])
 {
 	std::vector<int> types;
-	types.push_back(3);
-	types.push_back(2);
-	types.push_back(1);
-	types.push_back(1);
-	types.push_back(1);
+	for (int i = 0; i < 3; i++) types.push_back(0);
+	for (int i = 0; i < 2; i++) types.push_back(1);
+	for (int i = 0; i < 1; i++) types.push_back(2);
+	for (int i = 0; i < 1; i++) types.push_back(3);
+	for (int i = 0; i < 1; i++) types.push_back(4);
 
-	int count = 0;
-	for (int i = 0; i < types.size(); i++)
-		count += types[i];
-
-	for (int i = 0; i < 8; i++)
-	{
-		int random = rand()%count;
-		int chosen = 0;
-		while (random > 0)
-		{
-			random -= types[chosen];
-			chosen++;
-		}
-
-		array[i] = chosen;
-	}
+	random_shuffle(types.begin(), types.end());
+	for (int i = 0; i < 8; ++i)
+		array[i] = types[i];
 }
 
 GameScene::GameScene()
@@ -63,7 +50,19 @@ bool GameScene::Init()
 		GameObject* go;
 		AddChild(go = new GameObject());
 		go->transform.SetPosition(-920, -500);
-		go->AddComponent(new UpdatingText<int>("Time: ", m_info.time));
+		go->AddComponent(new UpdatingText<int>("Multiplier: ", m_info.multiplier, " X"));
+	}
+	{
+		GameObject* go;
+		AddChild(go = new GameObject());
+		go->transform.SetPosition(-920, -460);
+		go->AddComponent(new UpdatingText<float, int>("Time: ", m_info.time, "s"));
+	}
+	{
+		GameObject* go;
+		AddChild(go = new GameObject());
+		go->transform.SetPosition(-920, -420);
+		go->AddComponent(new UpdatingText<float, int>("Boost: ", m_info.boostTime, "s"));
 	}
 	{
 		GameObject* go;

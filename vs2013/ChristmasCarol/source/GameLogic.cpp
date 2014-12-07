@@ -6,12 +6,10 @@ GameLogic::GameLogic(CommonInfo& commonInfo)
 	m_lastIndex(-1),
 	m_lastCount(0),
 	m_moveDir(0),
-	m_eat(false),
-	m_timer(60),
-	m_boostTimer(0)
+	m_eat(false)
 {
-	m_commonInfo.time = m_timer;
-	m_commonInfo.boostTime = m_boostTimer;
+	m_commonInfo.time = 60;
+	m_commonInfo.boostTime = 0;
 	m_commonInfo.position = 1;
 	m_commonInfo.score = 0;
 	m_commonInfo.multiplier = 1;
@@ -65,10 +63,12 @@ void GameLogic::EatInIndex(const int index)
 
 int GameLogic::Update(float dt)
 {
-	m_timer -= dt;
-	m_boostTimer -= dt;
-	m_commonInfo.time = m_timer;
-	m_commonInfo.boostTime = m_boostTimer;
+	m_commonInfo.time -= dt;
+	if (m_commonInfo.time < 0)
+		m_commonInfo.time = 0;
+	m_commonInfo.boostTime -= dt;
+	if (m_commonInfo.boostTime < 0)
+		m_commonInfo.boostTime = 0;
 
 	if (m_moveDir != 0)
 	{
@@ -133,7 +133,7 @@ int GameLogic::Eat()
 {
 	int retVal = -1;
 
-	const int eatAmount = m_boostTimer > 0 ? 2 : 1;
+	const int eatAmount = m_commonInfo.boostTime > 0 ? 2 : 1;
 
 	for (int m = 0; m < eatAmount; m++)
 	{
@@ -152,13 +152,14 @@ int GameLogic::Eat()
 			m_commonInfo.multiplier = 1;
 			m_lastCount = 1;
 		}
+		else
+		{
+			m_lastCount = 1;
+		}
 
 		m_foods[i].amount--;
 
 		m_lastIndex = m_targetIndex;
-
-		if (m_lastCount == m_foods[i].max && m_foods[i].type != 4)
-			m_commonInfo.multiplier++;
 
 		switch (m_foods[i].type)
 		{
@@ -234,9 +235,16 @@ int GameLogic::Eat()
 			break;
 		case 4:
 				Score(500);
-				m_boostTimer = 15.0f;
+				m_commonInfo.boostTime = 15.0f;
 				retVal = i;
 			break;
+		}
+
+		if (m_lastCount == m_foods[i].max)
+		{
+			if (m_foods[i].type != 4)
+				m_commonInfo.multiplier++;
+			m_lastCount = 0;
 		}
 
 	}

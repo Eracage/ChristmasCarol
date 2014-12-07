@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Button.cpp" />
+    <ClCompile Include="source\CommonInfo.cpp" />
     <ClCompile Include="source\FoodComponent.cpp" />
     <ClCompile Include="source\GameLogic.cpp" />
     <ClCompile Include="source\HighScore.cpp" />

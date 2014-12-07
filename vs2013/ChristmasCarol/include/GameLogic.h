@@ -39,9 +39,6 @@ private:
 	int m_moveDir;
 	bool m_eat;
 	Food m_foods[8];
-
-	float m_timer;
-	float m_boostTimer;
 };
 
 #endif
