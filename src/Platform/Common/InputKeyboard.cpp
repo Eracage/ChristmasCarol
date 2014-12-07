@@ -1,6 +1,6 @@
 #include <UtH/Platform/Common/InputKeyboard.hpp>
 #include <GLFW/glfw3.h>
-
+#include <cstring>
 
 namespace uth
 {
