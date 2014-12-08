@@ -3,6 +3,7 @@
 #define GAMELOGIC_H
 
 #include <CommonInfo.h>
+#include <UtH/UtHEngine.hpp>
 
 class GameLogic
 {
@@ -31,6 +32,8 @@ private:
 
 	int Eat();
 
+	void Burb();
+
 	CommonInfo& m_commonInfo;
 	int m_targetIndex;
 	int m_lastIndex;
@@ -39,6 +42,10 @@ private:
 	int m_moveDir;
 	bool m_eat;
 	Food m_foods[8];
+
+	int clicks;
+
+	uth::Sound* sound;
 };
 
 #endif

@@ -15,6 +15,7 @@ public:
 	
 	void Update(float dt) override;
 	//void Draw(RenderTarget& target, RenderAttributes attributes = RenderAttributes()) override;
+	float time;
 };
 
 #endif

@@ -29,15 +29,18 @@ include $(PREBUILT_SHARED_LIBRARY)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE    := uthengine
-LOCAL_SRC_FILES := ../../vs2013/source/main.cpp \
-../../vs2013/source/CreditsScene.cpp \
-../../vs2013/source/GameScene.cpp \
-../../vs2013/source/GameLogic.cpp \
-../../vs2013/source/GameOverScene.cpp \
-../../vs2013/source/HighScore.cpp \
-../../vs2013/source/MenuScene.cpp \
-../../vs2013/source/Util.cpp \
-../../vs2013/source/Button.cpp
+LOCAL_SRC_FILES := main.cpp \
+../../vs2013/ChristmasCarol/source/CreditsScene.cpp \
+../../vs2013/ChristmasCarol/source/CommonInfo.cpp \
+../../vs2013/ChristmasCarol/source/Danger.cpp \
+../../vs2013/ChristmasCarol/source/FoodComponent.cpp \
+../../vs2013/ChristmasCarol/source/GameScene.cpp \
+../../vs2013/ChristmasCarol/source/GameLogic.cpp \
+../../vs2013/ChristmasCarol/source/GameOverScene.cpp \
+../../vs2013/ChristmasCarol/source/HighScore.cpp \
+../../vs2013/ChristmasCarol/source/MenuScene.cpp \
+../../vs2013/ChristmasCarol/source/Util.cpp \
+../../vs2013/ChristmasCarol/source/Button.cpp
 LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv2 -lOpenSLES
 LOCAL_STATIC_LIBRARIES := android_native_app_glue engine
 LOCAL_SHARED_LIBRARIES :=

@@ -1,6 +1,7 @@
 #pragma once
 #ifndef COMMONINFO_H
 #define COMMONINFO_H
+#include <UtH/UtHEngine.hpp>
 
 struct CommonInfo
 {
@@ -11,6 +12,7 @@ struct CommonInfo
 	static int multiplier;
 	static float dangerTime;
 	static float dangerPos;
+	static uth::Sound* music;
 };
 
 #endif

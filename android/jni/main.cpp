@@ -111,7 +111,7 @@ void android_main(android_app* state)
 	uthAndroidEngine.winEveHand = windowEventHandler;
 
 
-    uthSceneM.registerNewSceneFunc(NewSceneFunc, COUNT);
+    uthSceneM.registerNewSceneFunc(NewSceneFunc, SceneName::COUNT);
 
 	while(1)
 	{

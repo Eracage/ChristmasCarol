@@ -1,6 +1,7 @@
 #include <MenuScene.hpp>
 #include <Scenes.hpp>
 #include <Button.hpp>
+#include <CommonInfo.h>
 
 using namespace uth;
 
@@ -11,9 +12,23 @@ MenuScene::~MenuScene()
 
 bool MenuScene::Init()
 {
-	uthEngine.GetWindow().GetCamera().SetSize(1920, 1080);
+	static bool firstInit = true;
+	if (firstInit)
+	{
+		CommonInfo::music = uthRS.LoadSound("YYA - GTS JoululauluJope.wav");
+		CommonInfo::music->SetVolume(50);
+		CommonInfo::music->Play();
+		CommonInfo::music->Loop(true);
+		firstInit = false;
+	}
+	else
+		CommonInfo::music->Pause(false);
 
-	const pmath::Vec2 startPos = pmath::Vec2(400,-400);
+	uthEngine.GetWindow().GetCamera().SetSize(1920, 1080);
+	time = 0;
+	AddChild<GameObject>()->AddComponent(new Sprite("titleScreen.png"));
+
+	/*const pmath::Vec2 startPos = pmath::Vec2(400,-400);
 	const pmath::Vec2 endPos = pmath::Vec2(600  ,400);
 
 	const int count = 3;
@@ -33,7 +48,7 @@ bool MenuScene::Init()
 			break;
 		}
 	}
-
+*/
 
 	return true;
 }
@@ -44,6 +59,9 @@ bool MenuScene::DeInit()
 
 void MenuScene::Update(float dt)
 {
+	time += dt;
+	if (time > 0.2)
+		((GameObject*)Children()[0].get())->AddComponent(new Button([](){uthSceneM.GoToScene(SceneName::GAME); }));
 	Scene::Update(dt);
 }
 

@@ -1,5 +1,4 @@
 #include <GameLogic.h>
-#include <UtH/UtHEngine.hpp>
 #include <Scenes.hpp>
 
 GameLogic::GameLogic(CommonInfo& commonInfo)
@@ -15,8 +14,11 @@ GameLogic::GameLogic(CommonInfo& commonInfo)
 	m_commonInfo.position = 1;
 	m_commonInfo.score = 0;
 	m_commonInfo.multiplier = 1;
-	m_commonInfo.dangerTime = -5;
+	m_commonInfo.dangerTime = 16;
 	m_commonInfo.dangerPos = 5;
+
+	clicks = 0;
+	sound = uthRS.LoadSound("röyh.wav");
 }
 
 GameLogic::~GameLogic()
@@ -112,7 +114,7 @@ int GameLogic::Update(float dt)
 	{
 		if (m_commonInfo.dangerPos - 1.5 < CommonInfo::position &&
 			CommonInfo::position < m_commonInfo.dangerPos + 1.5)
-			uthSceneM.GoToScene(SceneName::GAMEOVER);
+			uthSceneM.GoToScene(SceneName::CREDITS);
 	}
 
 	return -1;
@@ -154,6 +156,9 @@ int GameLogic::Eat()
 		if (a == 0)
 			return retVal;
 
+		if (++clicks >= 150)
+			uthSceneM.GoToScene(SceneName::GAMEOVER);
+
 		if (i == m_lastIndex)
 		{
 			m_lastCount++;
@@ -187,6 +192,7 @@ int GameLogic::Eat()
 			case 4:
 			case 6:
 			case 8:
+				Burb();
 				retVal = i;
 				break;
 			default:
@@ -204,6 +210,7 @@ int GameLogic::Eat()
 			case 0:
 			case 5:
 			case 10:
+				Burb();
 				retVal = i;
 				break;
 			default:
@@ -219,8 +226,12 @@ int GameLogic::Eat()
 			switch (m_foods[i].amount)
 			{
 			case 0:
+			case 4:
 			case 8:
+			case 12:
 			case 16:
+			case 20:
+				Burb();
 				retVal = i;
 				break;
 			default:
@@ -238,6 +249,7 @@ int GameLogic::Eat()
 			case 0:
 			case 10:
 			case 20:
+				Burb();
 				retVal = i;
 				break;
 			default:
@@ -263,4 +275,17 @@ int GameLogic::Eat()
 
 	}
 	return retVal;
+}
+
+void GameLogic::Burb()
+{
+	float r = uth::Randomizer::GetFloat();
+	int g = uth::Randomizer::GetInt(20, 200);
+	int b = uth::Randomizer::GetInt(80, 90);
+	if (r < 0.1)
+	{
+		sound->Play();
+		sound->SetPitch(g);
+		sound->SetVolume(b);
+	}
 }

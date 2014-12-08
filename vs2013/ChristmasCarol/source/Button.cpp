@@ -17,10 +17,10 @@ void Button::Init()
 {
 	if (parent->transform.GetSize() == pmath::Vec2())
 	{
-		parent->AddComponent(new Sprite(
+		/*parent->AddComponent(new Sprite(
 			pmath::Vec4(Randomizer::GetFloat(), Randomizer::GetFloat(), Randomizer::GetFloat(), 0.45f),
 			pmath::Vec2(40,40)
-			));
+			));*/
 	}
 }
 
@@ -43,10 +43,10 @@ void Button::Update(float dt)
 
 void Button::SetSize(pmath::Vec2 size)
 {
-	pmath::Vec4 color = parent->GetComponent<Sprite>()->GetColor();
+	/*pmath::Vec4 color = parent->GetComponent<Sprite>()->GetColor();
 	parent->RemoveComponent(parent->GetComponent<Sprite>());
 
-	parent->AddComponent(new Sprite(color,size));
+	parent->AddComponent(new Sprite(color,size));*/
 
 	parent->transform.setSize(size);
 }

@@ -5,6 +5,7 @@
 #include <Button.hpp>
 #include <UpdatingText.h>
 #include <FoodComponent.h>
+#include <Danger.h>
 
 using namespace uth;
 
@@ -40,7 +41,32 @@ GameScene::~GameScene()
 
 bool GameScene::Init()
 {
+	m_atlas.LoadFromFile("sprites.xml");
+
 	const float tableScale = 0.6f;
+
+	const float width = 1660 * tableScale;
+	const float height = 1240 * tableScale;
+	for (int i = 1; i <= 6; i++)
+		m_waypoints.push_back({ -width / 2 + width / 6 * i, -height / 2 });
+	for (int i = 1; i <= 2; i++)
+		m_waypoints.push_back({ width / 2, -height / 2 + height / 2 * i });
+	for (int i = 5; i >= 0; i--)
+		m_waypoints.push_back({ -width / 2 + width / 6 * i, height / 2 });
+	for (int i = 1; i >= 0; i--)
+		m_waypoints.push_back({ -width / 2, -height / 2 + height / 2 * i });
+
+	for (int x = 0; x < 4; x++)
+		for (int y = 0; y < 3; y++)
+		{
+			GameObject* go;
+			AddChild(go = new GameObject());
+			Sprite* s;
+			go->AddComponent(s = new Sprite("floor.png"));
+			go->transform.SetPosition(-1024 + 512 * x, -768 + 512 * y);
+			go->transform.SetOrigin(7);
+			s->SetColor(pmath::Vec4(0.8, 0.8, 0.8, 1));
+		}
 
 #pragma region Texts
 	{
@@ -70,55 +96,85 @@ bool GameScene::Init()
 #pragma endregion
 
 	{
+		AddChild(m_batch = new SpriteBatch(false));
+		m_batch->SetTextureAtlas(&m_atlas);
+
+		for (int i = 0; i < 8; i++)
+		{
+			Transform* transform = new Transform(nullptr);
+			m_batch->AddSprite(transform,"chair.png");
+
+			transform->SetPosition(
+				m_waypoints[i * 2].x,
+				m_waypoints[i * 2].y);
+			if ((i + 1) % 4 == 0)
+			{
+				transform->SetPosition(
+					m_waypoints[i * 2].x - (m_waypoints[i * 2].x > 0 ? 1 : -1) * 30,
+					m_waypoints[i * 2].y);
+				transform->SetRotation((m_waypoints[i * 2].x > 0 ? 1 : -1) * 90);
+			}
+			else
+			{
+				transform->SetPosition(
+					m_waypoints[i * 2].x * 0.9,
+					m_waypoints[i * 2].y - (m_waypoints[i * 2].y > 0 ? 1 : -1) * 30);
+				transform->SetRotation((m_waypoints[i * 2].y > 0 ? 1 : -1) * 90 + 90);
+			}
+			transform->SetScale(0.6f);
+		}
+	}
+
+	{
 		GameObject* go;
 		AddChild(go = new GameObject());
 		go->AddComponent(new Sprite("table.png"/*pmath::Vec4(0,1,0,1),pmath::Vec2(1100,500)*/));
 		go->transform.SetScale(tableScale);
 	}
 	{
-		m_atlas.LoadFromFile("sprites.xml");
 		AddChild(m_batch = new SpriteBatch(false));
 		m_batch->SetTextureAtlas(&m_atlas);
 	}
 	{
 		AddChild(m_santa = new GameObject());
-		m_santa->AddComponent(new Sprite("test.tga"));
+		m_santa->AddComponent(new AnimatedSprite(uthRS.LoadTexture("santa.png"),4,4,2));
+		m_santa->transform.SetScale(0.6);
 	}
 
-	const float width = 1660 * tableScale;
-	const float height = 1240 * tableScale;
-	for (int i = 1; i <= 6; i++)
-		m_waypoints.push_back({ -width / 2 + width / 6 * i, -height / 2 });
-	for (int i = 1; i <= 2; i++)
-		m_waypoints.push_back({ width / 2, -height / 2 + height/2 * i});
-	for (int i = 5; i >= 0; i--)
-		m_waypoints.push_back({ -width / 2 + width / 6 * i, height / 2 });
-	for (int i = 1; i >= 0; i--)
-		m_waypoints.push_back({ -width / 2, -height / 2 + height / 2 * i });
+	
 
 	int array[8];
 	randomTypes(array);
 	m_logic.SetTypes(array);
 	for (int i = 0; i < 8; i++)
 	{
-		static GameLogic& logic = m_logic;
+		static GameLogic* logic = &m_logic;
+		logic = &m_logic;
 		GameObject* go;
 		Button* btn;
 		m_batch->AddChild(go = new GameObject("Food"));
 		go->AddComponent(new FoodComponent(array[i]));
-		go->AddComponent(btn = new Button([i](){logic.EatInIndex(i); }));
+		go->AddComponent(btn = new Button([i](){logic->EatInIndex(i); }));
 		btn->SetSize({ 128, 128 });
 
-		if ((i+1)%4 == 0)
+		if ((i + 1) % 4 == 0)
+		{
 			go->transform.SetPosition(
-			m_waypoints[i * 2].x - (m_waypoints[i * 2].x > 0 ? 1 : -1) * 150,
-			m_waypoints[i * 2].y);
+				m_waypoints[i * 2].x - (m_waypoints[i * 2].x > 0 ? 1 : -1) * 170,
+				m_waypoints[i * 2].y);
+		}
 		else
+		{
 			go->transform.SetPosition(
-			m_waypoints[i * 2].x * 0.9, 
-			m_waypoints[i * 2].y - (m_waypoints[i * 2].y > 0 ? 1 : -1) * 160);
+				m_waypoints[i * 2].x * 0.9,
+				m_waypoints[i * 2].y - (m_waypoints[i * 2].y > 0 ? 1 : -1) * 160);
+		}
 	}
-
+	{
+		Danger* d;
+		AddChild(d = new Danger());
+		d->Init();
+	}
 	return true;
 }
 bool GameScene::DeInit()
