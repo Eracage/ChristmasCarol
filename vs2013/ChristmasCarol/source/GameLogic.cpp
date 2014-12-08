@@ -220,8 +220,11 @@ int GameLogic::Eat()
 			switch (m_foods[i].amount)
 			{
 			case 0:
+			case 4:
 			case 8:
+			case 12:
 			case 16:
+			case 20:
 				retVal = i;
 				break;
 			default:

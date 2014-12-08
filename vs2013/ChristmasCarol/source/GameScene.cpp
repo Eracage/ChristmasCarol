@@ -187,6 +187,9 @@ void GameScene::Update(float dt)
 	if (dt > 0.1)
 		dt = 0.1;
 
+	float angle = m_santa->transform.GetPosition().angle() + 90;
+	m_santa->transform.SetRotation(angle);
+
 	if (uthInput.Common == InputEvent::RELEASE)
 	{
 		pmath::Vec2 mousePos = uthEngine.GetWindow().PixelToCoords(uthInput.Common.Position());

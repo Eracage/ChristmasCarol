@@ -2,6 +2,7 @@
 #include <Scenes.hpp>
 #include <Button.hpp>
 #include <CommonInfo.h>
+#include <UpdatingText.h>
 
 using namespace uth;
 
@@ -17,6 +18,11 @@ bool CreditsScene::Init()
 	
 	time = 0;
 	AddChild<GameObject>()->AddComponent(new Sprite("ending2.png"));
+
+	GameObject* go;
+	AddChild(go = new GameObject());
+	go->transform.SetPosition(-920, -540);
+	go->AddComponent(new UpdatingText<unsigned long long>("Score: ", CommonInfo::score));
 	return true;
 }
 bool CreditsScene::DeInit()
@@ -28,7 +34,7 @@ bool CreditsScene::DeInit()
 void CreditsScene::Update(float dt)
 {
 	time += dt;
-	if (time > 0.8)
+	if (time > 2)
 		((GameObject*)Children()[0].get())->AddComponent(new Button([](){uthSceneM.GoToScene(SceneName::MENU); }));
 	Scene::Update(dt);
 }

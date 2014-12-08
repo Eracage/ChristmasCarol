@@ -94,7 +94,7 @@ void FoodComponent::Init()
 		}
 		break;
 	case 2:
-		m_state = 3;
+		m_state = 6;
 		{
 			float r2 = Randomizer::GetFloat(0.4, 0.5);
 			for (int i = 0; i < m_state + 1; i++)
