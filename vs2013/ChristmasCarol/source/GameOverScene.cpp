@@ -11,8 +11,8 @@ GameOverScene::~GameOverScene()
 
 bool GameOverScene::Init()
 {
-	Sound* sound = uthRS.LoadSound("rrööyyh.wav");
-	sound->SetPitch(0.5);
+	Sound* sound = uthRS.LoadSound("rrooyyh.wav");
+	sound->SetPitch(80);
 	sound->Play();
 	time = 0;
 	AddChild<GameObject>()->AddComponent(new Sprite("ending1.png"));
@@ -26,7 +26,7 @@ bool GameOverScene::DeInit()
 void GameOverScene::Update(float dt)
 {
 	time += dt;
-	if (time > 0.2)
+	if (time > 0.8)
 		((GameObject*)Children()[0].get())->AddComponent(new Button([](){uthSceneM.GoToScene(SceneName::MENU); }));
 	Scene::Update(dt);
 }

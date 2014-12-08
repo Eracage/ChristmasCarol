@@ -84,12 +84,17 @@ void FoodComponent::Init()
 			m_objects.back()->transform.Move(Randomizer::InsideCircle(10));
 			m_objects.back()->transform.SetOrigin({ 0, 20 });
 
-			batch->AddSprite(&m_objects.back()->transform, "milkFull.png");
+			if (r < 0.5)
+			{
+				batch->AddSprite(&m_objects.back()->transform, "wineFull.png");
+				m_type = 5;
+			}
+			else
+				batch->AddSprite(&m_objects.back()->transform, "milkFull.png");
 		}
 		break;
 	case 2:
-		parent->transform.SetScale(4);
-		m_state = 6;
+		m_state = 3;
 		{
 			float r2 = Randomizer::GetFloat(0.4, 0.5);
 			for (int i = 0; i < m_state + 1; i++)
@@ -106,12 +111,14 @@ void FoodComponent::Init()
 					m_objects.back()->transform.SetScale(r2*1.5);
 					break;
 				case 6:
-					if (r < 0.5)batch->AddSprite(&m_objects.back()->transform, "porridge.png");
+					if (r < 0.33)batch->AddSprite(&m_objects.back()->transform, "porridge.png");
+					else if (r < 0.66)batch->AddSprite(&m_objects.back()->transform, "salad.png");
 					else batch->AddSprite(&m_objects.back()->transform, "rosolli.png");
 					m_objects.back()->transform.SetScale(r2);
 					break;
 				default:
-					if (r < 0.5)batch->AddSprite(&m_objects.back()->transform, "porridge.png");
+					if (r < 0.33)batch->AddSprite(&m_objects.back()->transform, "porridge.png");
+					else if (r < 0.66)batch->AddSprite(&m_objects.back()->transform, "salad.png");
 					else batch->AddSprite(&m_objects.back()->transform, "rosolli.png");
 					m_objects.back()->transform.SetPosition(
 						pmath::Mat2::createRotation(72 * i) *
@@ -133,6 +140,8 @@ void FoodComponent::Init()
 				parent->AddChild(m_objects.back());
 				m_objects.back()->SetActive(false);
 
+				r = 0.2;
+
 				switch (i)
 				{
 				case 0:
@@ -149,32 +158,38 @@ void FoodComponent::Init()
 					else if (r < 0.66)
 					{
 						batch->AddSprite(&m_objects.back()->transform, "cake3.png");
+						m_objects.back()->transform.SetPosition(2, 8);
 					}
 					else
 					{
 						batch->AddSprite(&m_objects.back()->transform, "ham3.png");
+						m_objects.back()->transform.SetPosition(8, 0);
 					}
 					m_objects.back()->transform.SetScale(r2);
 					break;
 				case 2:
 					if (r < 0.33)
 					{
-						batch->AddSprite(&m_objects.back()->transform, "turkey2.png");
+						batch->AddSprite(&m_objects.back()->transform, "turkey1.png");
+						m_objects.back()->transform.SetPosition(-2, -10);
 					}
 					else if (r < 0.66)
 					{
 						batch->AddSprite(&m_objects.back()->transform, "cake2.png");
+						m_objects.back()->transform.SetPosition(6, 0);
 					}
 					else
 					{
 						batch->AddSprite(&m_objects.back()->transform, "ham2.png");
+						m_objects.back()->transform.SetPosition(8, 0);
 					}
 					m_objects.back()->transform.SetScale(r2);
 					break;
 				case 3:
 					if (r < 0.33)
 					{
-						batch->AddSprite(&m_objects.back()->transform, "turkey1.png");
+						batch->AddSprite(&m_objects.back()->transform, "turkey2.png");
+						m_objects.back()->transform.SetPosition(12, 22);
 					}
 					else if (r < 0.66)
 					{
@@ -196,7 +211,7 @@ void FoodComponent::Init()
 		m_objects.push_back(new Object);
 		parent->AddChild(m_objects.back());
 		m_objects.back()->SetActive(false);
-		m_objects.back()->transform.SetScale(Randomizer::GetFloat(0.4, 0.45));
+		m_objects.back()->transform.SetScale(Randomizer::GetFloat(0.5, 0.6));
 
 		batch->AddSprite(&m_objects.back()->transform, "isammaa.png");
 	}
@@ -216,14 +231,25 @@ void FoodComponent::DropState()
 		batch->RemoveSprite(&m_objects[m_state + 1]->transform);
 		break;
 	case 1:
+	case 5:
 		for (int i = 0; i < 3; i++)
 		{
 			batch->RemoveSprite(&m_objects[i]->transform);
 
-			if (m_state > i)
-				batch->AddSprite(&m_objects[i]->transform, "milkFull.png");
+			if (m_type == 1)
+			{
+				if (m_state > i)
+					batch->AddSprite(&m_objects[i]->transform, "milkFull.png");
+				else
+					batch->AddSprite(&m_objects[i]->transform, "milkEmpty.png");
+			}
 			else
-				batch->AddSprite(&m_objects[i]->transform, "milkEmpty.png");
+			{
+				if (m_state > i)
+					batch->AddSprite(&m_objects[i]->transform, "wineFull.png");
+				else
+					batch->AddSprite(&m_objects[i]->transform, "wineEmpty.png");
+			}
 		}
 		if (r < 0.4)
 		{

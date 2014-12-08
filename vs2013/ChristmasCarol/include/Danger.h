@@ -11,7 +11,6 @@ public:
 
 	void update(float dt) override;
 private:
-	float time;
 	std::vector<pmath::Vec2> positions;
 	std::vector<float> rotations;
 	std::vector<float> pos;

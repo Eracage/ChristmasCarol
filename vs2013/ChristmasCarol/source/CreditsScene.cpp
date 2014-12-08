@@ -28,7 +28,7 @@ bool CreditsScene::DeInit()
 void CreditsScene::Update(float dt)
 {
 	time += dt;
-	if (time > 0.2)
+	if (time > 0.8)
 		((GameObject*)Children()[0].get())->AddComponent(new Button([](){uthSceneM.GoToScene(SceneName::MENU); }));
 	Scene::Update(dt);
 }

@@ -18,7 +18,7 @@ GameLogic::GameLogic(CommonInfo& commonInfo)
 	m_commonInfo.dangerPos = 5;
 
 	clicks = 0;
-	sound = uthRS.LoadSound("röyh.wav");
+	sound = uthRS.LoadSound("royh.wav");
 }
 
 GameLogic::~GameLogic()
@@ -62,8 +62,6 @@ void GameLogic::MoveToIndex(const int index)
 
 void GameLogic::EatInIndex(const int index)
 {
-	m_targetIndex;
-	CalculateMoveDir();
 	m_eat = m_moveDir == 0;
 }
 
@@ -83,8 +81,6 @@ int GameLogic::Update(float dt)
 			m_commonInfo.position -= 8;
 		if (m_commonInfo.position < 0)
 			m_commonInfo.position += 8;
-
-		float dif = m_targetIndex - m_commonInfo.position;
 
 		if (m_moveDir == 1)
 		{
@@ -192,7 +188,6 @@ int GameLogic::Eat()
 			case 4:
 			case 6:
 			case 8:
-				Burb();
 				retVal = i;
 				break;
 			default:
@@ -210,7 +205,6 @@ int GameLogic::Eat()
 			case 0:
 			case 5:
 			case 10:
-				Burb();
 				retVal = i;
 				break;
 			default:
@@ -226,12 +220,8 @@ int GameLogic::Eat()
 			switch (m_foods[i].amount)
 			{
 			case 0:
-			case 4:
 			case 8:
-			case 12:
 			case 16:
-			case 20:
-				Burb();
 				retVal = i;
 				break;
 			default:
@@ -249,7 +239,6 @@ int GameLogic::Eat()
 			case 0:
 			case 10:
 			case 20:
-				Burb();
 				retVal = i;
 				break;
 			default:
@@ -274,15 +263,17 @@ int GameLogic::Eat()
 		}
 
 	}
+	if (retVal >= 0)
+		Burb();
 	return retVal;
 }
 
 void GameLogic::Burb()
 {
-	float r = uth::Randomizer::GetFloat();
-	int g = uth::Randomizer::GetInt(20, 200);
+	//float r = uth::Randomizer::GetFloat();
+	int g = uth::Randomizer::GetInt(30, 160);
 	int b = uth::Randomizer::GetInt(80, 90);
-	if (r < 0.1)
+	//if (r < 0.1)
 	{
 		sound->Play();
 		sound->SetPitch(g);

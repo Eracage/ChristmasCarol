@@ -22,7 +22,7 @@ bool MenuScene::Init()
 		firstInit = false;
 	}
 	else
-		CommonInfo::music->Pause(false);
+		CommonInfo::music->Play();
 
 	uthEngine.GetWindow().GetCamera().SetSize(1920, 1080);
 	time = 0;
@@ -60,7 +60,7 @@ bool MenuScene::DeInit()
 void MenuScene::Update(float dt)
 {
 	time += dt;
-	if (time > 0.2)
+	if (time > 0.8)
 		((GameObject*)Children()[0].get())->AddComponent(new Button([](){uthSceneM.GoToScene(SceneName::GAME); }));
 	Scene::Update(dt);
 }

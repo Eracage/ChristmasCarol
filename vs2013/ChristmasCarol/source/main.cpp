@@ -9,8 +9,11 @@ int main()
 	uthSceneM.registerNewSceneFunc(NewSceneFunc,SceneName::COUNT);
 
 	srand(time(NULL));
-	Highscore a;
-	uthEngine.Init();
+
+	uth::WindowSettings windowSettings;
+	windowSettings.title = "Christmas Carol";
+
+	uthEngine.Init(windowSettings);
 
 	while(uthEngine.Running())
 	{
